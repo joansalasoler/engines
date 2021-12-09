@@ -27,8 +27,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.joansala</groupId>
-  <artifactId>samurai-engines</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <artifactId>engines</artifactId>
+  <version>${revision}</version>
   <name>Samurai Engines</name>
   <packaging>pom</packaging>
 
@@ -40,6 +40,8 @@
   <!-- Project properties =============================================== -->
 
   <properties>
+    <revision>1.0.0-SNAPSHOT</revision>
+    <samurai.version>1.0.0-SNAPSHOT</samurai.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
