@@ -50,13 +50,14 @@
   <!-- Project modules ================================================== -->
 
   <modules>
+    <module>samurai</module>
     <module>chess</module>
     <module>draughts</module>
     <module>ggp</module>
     <module>go</module>
     <module>othello</module>
     <module>oware</module>
-    <module>samurai</module>
+    <module>tictactoe</module>
   </modules>
 
   <!-- Build configuration ============================================== -->

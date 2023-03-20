@@ -19,3 +19,6 @@
 [submodule "samurai"]
 	path = samurai
 	url = git@github.com:joansalasoler/samurai.git
+[submodule "tictactoe"]
+	path = tictactoe
+	url = git@github.com:joansalasoler/tictactoe.git
