@@ -40,8 +40,8 @@
   <!-- Project properties =============================================== -->
 
   <properties>
-    <revision>1.0.0-SNAPSHOT</revision>
-    <samurai.version>1.1.0-SNAPSHOT</samurai.version>
+    <revision>1.2.0-SNAPSHOT</revision>
+    <samurai.version>1.2.0-SNAPSHOT</samurai.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
