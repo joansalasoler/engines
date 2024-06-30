@@ -1,9 +1,15 @@
 What is it?
 ===========
 
-This repository contains a framework for implementing zero-sum game engines and some reference games implemented with it.
+This repository contains a framework for implementing zero-sum game
+engines and some reference games implemented with it.
 
-Samurai is a generic framework for implementing search engines for zero-sum games. It provides a variety of algorithms and tools that can be used to develop engines for a wide range of games, including:
+Samurai Framework
+=================
+
+Samurai is a generic framework for implementing search engines for
+zero-sum games. It provides a variety of algorithms and tools that can
+be used to develop engines for a wide range of games, including:
 
 * UCI protocol support for any game.
 * Base open-book implementation.
@@ -15,16 +21,175 @@ Samurai is a generic framework for implementing search engines for zero-sum game
 * Utilities for bitwise operations.
 * Hashing algorithms: Zobrist, binomial minimal perfect hash, Lehmer codes.
 
-Some of the command-line tools provided by Samurai, that can be used with any built-in or external engine that implements the UCI protocol:
+Built-in Tools
+==============
+
+Samurai provides several command-line tools usable with any built-in or
+external engine supporting the UCI protocol:
 
 * Interactive UCI shell and UCI service.
 * Automatic opening-book construction tools using UTC trees.
 * Benchmarking tools (including perft, divide, and round-robin tournaments).
 * A command-line interface for playing against an engine.
 
-This repository also includes simple and sometimes incomplete implementations for some games, including chess, checkers, go, othello, oware, and tic-tac-toe.
+Sample Games
+============
 
-In addition, it includes an implementation for using the framework with GGP (General Game Playing) that can be used as a reference for implementing new engines and test their implementations.
+This repository includes simple (and sometimes incomplete)
+implementations for several games: chess, checkers, go, othello, oware,
+and tic-tac-toe.
+
+An implementation for using Samurai with GGP (General Game Playing) is
+also included, serving as a reference for implementing and testing new
+engines.
+
+Building with Maven
+===================
+
+This project uses Maven for building and managing dependencies. Here's
+how to get started:
+
+Prerequisites:
+
+* Java 11 or later
+* Apache Maven
+
+Build and Install:
+
+1. Clone or download the repository.
+2. Navigate to the project directory in your terminal.
+3. Run ```mvn``` to build the project.
+
+Running Chess with Samurai Framework
+====================================
+
+The provided instructions successfully build the Samurai framework with
+the sample game implementations. Here's how to interact with the Chess
+engine using the built JAR file:
+
+## Displaying Help
+
+To see the general Chess engine options, run:
+
+```
+java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar --help
+```
+
+This will display available options like ```--disturbance```, ```--roots```,
+and ```--threshold``` for opening book management, along with commands
+like ```book```, ```match```, ```service```, and ```shell```.
+
+## Specific Command Help
+
+To get help for individual commands like ```book```, use:
+
+```
+java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar book --help
+```
+
+This will show options for ```query```, ```export```, and ```train```
+related to opening book management.
+
+## Starting UCI Service
+
+To start the Chess engine in UCI mode, allowing external chess programs
+to interact with it, run:
+
+```
+java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar service
+```
+
+This will typically be used by other chess interfaces or tools.
+
+## Interactive UCI Shell
+
+To enter an interactive UCI shell where you can directly send UCI
+commands to the engine, run:
+
+```
+java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar shell
+```
+
+Within the shell, you can issue commands like ```ucinewgame```,
+```position fen ...```, and ```go movetime 1000``` to interact with the
+engine. Refer to the UCI protocol documentation for detailed commands
+(https://www.chessprogramming.org/UCI).
+
+Command Line Interface
+======================
+
+The engines built with the Samurai framework, offer a common set of
+commands for interacting with the engine and managing its functionalities.
+These commands provide a standardized way to perform actions like opening
+book management, playing games, and engine testing. However, engines can
+also implement their own custom commands beyond this core set.
+
+## Book Management
+
+* ```book```: This is the main command for opening book utilities.
+
+    * ```query```: Queries the opening book database for a specific position.
+    * ```export```: Exports the opening book database to a file.
+    * ```train```: Automatically builds an opening book database.
+
+## Engine Execution
+
+* ```match```: Play a match against the engine on the command line.
+* ```service```: Starts the engine in UCI mode, allowing external programs
+  to control it.
+* ```shell```: Provides an interactive UCI shell where you can directly send
+  UCI commands to the engine.
+
+## Game Suite Utilities
+
+* ```suite```: This is the main command for game suite utilities.
+
+    * ```show```: Plays pre-defined game suites on the board.
+    * ```random```: Generates random game suites for testing purposes.
+
+## Engine Testing
+
+* ```test```: This is the main command for engine testing utilities.
+
+    * ```battle```: Runs a tournament between multiple engines.
+    * ```bench```: Benchmarks the engine's performance.
+    * ```divide```: Analyzes the search tree by counting leaves at each child node.
+    * ```perft```: Counts the total number of leaf nodes in the search tree
+      up to a certain depth.
+
+These commands provide a powerful toolkit for interacting with the
+engines, allowing you to manage opening books, play games, test engine
+performance, debug and analyze its search behavior.
+
+Using External Engines
+======================
+
+While these commands are typically used with the built-in engines, Samurai
+allows you to interact with external engines that implement a compatible
+UCI service. This is achieved using the ```--command``` option.
+
+## Example: Running GNU Chess in an interactive shell
+
+For instance, if you have GNU Chess installed and want to use its engine
+within the Samurai framework's shell, you could potentially execute:
+
+```
+java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar shell --command="gnuchess --uci"
+```
+
+This instructs the framework to launch ```gnuchess``` with the ```--uci```
+flag, enabling GNU Chess to act as a UCI service that the Samurai shell
+can interact with.
+
+Once the command executes, you'll enter the Samurai shell. Here, you can
+interact with the GNU Chess engine directly using UCI commands. Within
+the shell, type ```uci``` to initiate an interactive session with GNU
+Chess. Type ```quit``` to end the session.
+
+Now, you can issue various UCI commands to control the engine. Samurai
+shell should display the board after each UCI command. Typing ```TAB```
+will provide autocompletion suggestions for valid UCI commands. Some
+built-in engines may provide additional custom UCI commands.
 
 The Latest Version
 ==================
