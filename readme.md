@@ -54,11 +54,35 @@ Prerequisites:
 * Java 11 or later
 * Apache Maven
 
-Build and Install:
+Build and Package:
 
 1. Clone or download the repository.
 2. Navigate to the project directory in your terminal.
 3. Run ```mvn``` to build the project.
+
+Native image builds with GraalVM
+================================
+
+GraalVM's Native Image allows you to compile your Java code ahead-of-time
+(AOT) into a standalone executable, improving startup time and reducing
+overall application size. Here's how to build a game as a native image:
+
+Prerequisites:
+
+* GraalVM 22 or later
+
+Ensure you have GraalVM installed with the Native Image extension. Refer
+to the GraalVM documentation for installation instructions:
+https://www.graalvm.org/22.1/reference-manual/native-image/.
+
+Building with Profile-Guided Optimizations (PGO):
+
+PGO allows you to further optimize the native image by providing profile information about how the engine is typically used. This can lead to
+significant performance improvements.
+
+1. Clone or download the repository.
+2. Navigate to the project directory in your terminal.
+3. Run ```mvn -Poptimized``` to build the project.
 
 Running Chess with Samurai Framework
 ====================================
@@ -72,7 +96,7 @@ engine using the built JAR file:
 To see the general Chess engine options, run:
 
 ```
-java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar --help
+java -jar target/chess-1.2.0-SNAPSHOT-jar-with-dependencies.jar --help
 ```
 
 This will display available options like ```--disturbance```, ```--roots```,
@@ -84,7 +108,7 @@ like ```book```, ```match```, ```service```, and ```shell```.
 To get help for individual commands like ```book```, use:
 
 ```
-java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar book --help
+java -jar target/chess-1.2.0-SNAPSHOT-jar-with-dependencies.jar book --help
 ```
 
 This will show options for ```query```, ```export```, and ```train```
@@ -96,7 +120,7 @@ To start the Chess engine in UCI mode, allowing external chess programs
 to interact with it, run:
 
 ```
-java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar service
+java -jar target/chess-1.2.0-SNAPSHOT-jar-with-dependencies.jar service
 ```
 
 This will typically be used by other chess interfaces or tools.
@@ -107,7 +131,7 @@ To enter an interactive UCI shell where you can directly send UCI
 commands to the engine, run:
 
 ```
-java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar shell
+java -jar target/chess-1.2.0-SNAPSHOT-jar-with-dependencies.jar shell
 ```
 
 Within the shell, you can issue commands like ```ucinewgame```,
@@ -126,11 +150,9 @@ also implement their own custom commands beyond this core set.
 
 ## Book Management
 
-* ```book```: This is the main command for opening book utilities.
-
-    * ```query```: Queries the opening book database for a specific position.
-    * ```export```: Exports the opening book database to a file.
-    * ```train```: Automatically builds an opening book database.
+* ```book query```: Queries the opening book database for a specific position.
+* ```book export```: Exports the opening book database to a file.
+* ```book train```: Automatically builds an opening book database.
 
 ## Engine Execution
 
@@ -142,19 +164,16 @@ also implement their own custom commands beyond this core set.
 
 ## Game Suite Utilities
 
-* ```suite```: This is the main command for game suite utilities.
-
-    * ```show```: Plays pre-defined game suites on the board.
-    * ```random```: Generates random game suites for testing purposes.
+* ```suite show```: Plays pre-defined game suites on the board.
+* ```suite random```: Generates random game suites for testing purposes.
 
 ## Engine Testing
 
-* ```test```: This is the main command for engine testing utilities.
-
-    * ```battle```: Runs a tournament between multiple engines.
-    * ```bench```: Benchmarks the engine's performance.
-    * ```divide```: Analyzes the search tree by counting leaves at each child node.
-    * ```perft```: Counts the total number of leaf nodes in the search tree
+* ```test battle```: Runs a tournament between multiple engines.
+* ```test bench```: Benchmarks the engine's performance.
+* ```test play```: Play the provided games without benchmarking
+* ```test divide```: Analyzes the search tree by counting leaves at each child node.
+* ```test perft```: Counts the total number of leaf nodes in the search tree
       up to a certain depth.
 
 These commands provide a powerful toolkit for interacting with the
@@ -174,7 +193,7 @@ For instance, if you have GNU Chess installed and want to use its engine
 within the Samurai framework's shell, you could potentially execute:
 
 ```
-java -jar target/chess-engine-1.2.0-SNAPSHOT-jar-with-dependencies.jar shell --command="gnuchess --uci"
+java -jar target/chess-1.2.0-SNAPSHOT-jar-with-dependencies.jar shell --command="gnuchess --uci"
 ```
 
 This instructs the framework to launch ```gnuchess``` with the ```--uci```
