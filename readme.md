@@ -13,7 +13,7 @@ be used to develop engines for a wide range of games, including:
 
 * UCI protocol support for any game.
 * Base open-book implementation.
-* Search algorithms: UCT, Negamax, Monte-Carlo, etc.
+* Search algorithms: UCT, MTD(f), Negamax, Monte-Carlo, etc.
 * Generic EGTB implementation.
 * Generic transposition table implementation.
 * Generic automatic opening-book generator.
