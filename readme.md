@@ -13,7 +13,7 @@ be used to develop engines for a wide range of games, including:
 
 * UCI protocol support for any game.
 * Base open-book implementation.
-* Search algorithms: UCT, MTD(f), Negamax, Monte-Carlo, etc.
+* Search algorithms: UCT, PUCT, MTD(f), Negamax, Monte-Carlo, etc.
 * Generic EGTB implementation.
 * Generic transposition table implementation.
 * Generic automatic opening-book generator.
@@ -179,6 +179,47 @@ also implement their own custom commands beyond this core set.
 These commands provide a powerful toolkit for interacting with the
 engines, allowing you to manage opening books, play games, test engine
 performance, debug and analyze its search behavior.
+
+Built-in Search Engines
+=======================
+
+This section provides an overview of the search engines included in the
+framework. Each engine employs different algorithms and strategies for
+move selection.
+
+## Minimax Search Engines
+
+* ```NEGAMAX```: A classic minimax implementation with iterative
+  deepening. This engine explores the game tree to a specified depth,
+  evaluating positions at the leaf nodes to determine the best move.
+* ```MTD(f)```: Employs the negamax algorithm with a transposition table
+  and depth-first search. This approach is often more efficient than
+  standard negamax for certain game types.
+
+## Monte Carlo Tree Search (MCTS) Engines
+
+* ```MONTECARLO```: A classic implementation of MCTS using random
+  playouts to evaluate positions.
+* ```UCT```: MCTS Upper Confidence Bound applied to Trees (UCT) that
+  uses the UCB1 formula to choose the nodes to expand. Nodes are
+  evaluated using an heuristic function.
+* ```PUCT```: Similar to UCT, but with additional heuristics to guide
+  the search. It may perform better than UCT for some games.
+* ```PARTNER```: Cooperative MCTS UCT variant for single-player games.
+
+## Engines with Permanent Memory
+
+* ```DOE```: A multithreaded MCTS UCT engine that leverages a key-value
+  database for persistent storage of nodes. It's particularly well-suited
+  for building opening books automatically. It requieres an external
+  engine to evaluate the expanded nodes.
+
+## Randomized Search Engines
+
+* ```MINDLESS```: Selects moves purely by chance, without any evaluation
+  or search.
+* ```SAMPLER```: Selects moves by pure Monte-Carlo random sampling (not
+  to be confused with Monte-Carlo Tree Search).
 
 Using External Engines
 ======================
