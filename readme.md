@@ -60,6 +60,35 @@ Build and Package:
 2. Navigate to the project directory in your terminal.
 3. Run ```mvn``` to build the project.
 
+To run the basic unit tests with Maven:
+
+```
+mvn clean test -Dmaven.test.skip=false
+```
+
+These unit tests validate the core interface contracts of the **Game**,
+**Board**, and **Engine** classes. They help ensure that each engine
+integrates seamlessly with the built-in toolset.
+
+Engine Validation Tests:
+
+For more thorough engine validation, use the built-in "test" commands:
+
+* **perft**: Counts all leaf moves from a position up to a given depth.
+  This verifies move generation correctness and
+  provides performance benchmarks.
+* **divide**: Similar to perft, but shows the count for each possible
+  move separately. Useful for debugging move generation issues.
+
+These tests are crucial for ensuring your engine generates moves
+correctly and performs adequately. Expected results for existing engines
+are stored in `test/resources/` of each engine module
+
+Validating New Engines:
+
+When implementing a new game engine, the GGP (General Game Playing)
+implementation can be used to generate correct perft and divide values.
+
 Native image builds with GraalVM
 ================================
 
@@ -171,10 +200,9 @@ also implement their own custom commands beyond this core set.
 
 * ```test battle```: Runs a tournament between multiple engines.
 * ```test bench```: Benchmarks the engine's performance.
-* ```test play```: Play the provided games without benchmarking
-* ```test divide```: Analyzes the search tree by counting leaves at each child node.
-* ```test perft```: Counts the total number of leaf nodes in the search tree
-      up to a certain depth.
+* ```test play```: Play the provided games without benchmarking.
+* ```test divide```: Counts moves for each possible first move from a position (useful for debugging move generation).
+* ```test perft```: Counts all possible moves up to a given depth (validates move generation correctness and measures performance).
 
 These commands provide a powerful toolkit for interacting with the
 engines, allowing you to manage opening books, play games, test engine
