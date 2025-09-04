@@ -128,9 +128,7 @@ To see the general Chess engine options, run:
 java -jar target/chess-1.2.0-SNAPSHOT-jar-with-dependencies.jar --help
 ```
 
-This will display available options like ```--disturbance```, ```--roots```,
-and ```--threshold``` for opening book management, along with commands
-like ```book```, ```match```, ```service```, and ```shell```.
+This will display available options like ```--roots```, and ```--threshold``` for opening book management, along with commands like ```book```, ```match```, ```service```, and ```shell```.
 
 ## Specific Command Help
 
